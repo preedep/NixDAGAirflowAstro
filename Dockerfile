@@ -1,4 +1,4 @@
-FROM quay.io/astronomer/astro-runtime:3.0.6
+FROM astrocrpublic.azurecr.io/runtime:3.0-4
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
