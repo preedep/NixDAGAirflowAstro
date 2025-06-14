@@ -1,32 +1,24 @@
-from airflow import DAG
-from airflow.operators.python import PythonOperator
-from datetime import datetime, timedelta
+# file: dags/hello_world.py
 
-# ฟังก์ชันที่เราจะให้ DAG รัน
+from airflow.sdk import DAG
+from airflow.providers.standard.operators.python import PythonOperator
+from datetime import datetime
+
 def say_hello():
-    print("Hello, Airflow!")
+    print("Hello, Airflow! 🎉")
 
-# ค่า default สำหรับ DAG นี้
-default_args = {
-    'owner': 'airflow',
-    'retries': 1,
-    'retry_delay': timedelta(minutes=1),
-}
-# สร้าง DAG object
 with DAG(
-    dag_id='hello_world_dag',
-    description='A simple Hello World DAG',
-    default_args=default_args,
+    dag_id="hello_world_dag",
+    description="A simple Hello World DAG compatible with Airflow 3.x",
     start_date=datetime(2024, 1, 1),
-    schedule_interval='@daily',  # รันทุกวัน
-    catchup=False,
-    tags=['example', 'hello']
+    schedule="@daily",      # ✅ ใช้ schedule= แทน schedule_interval
+    catchup=False,          # ไม่ทำ backfill ย้อนหลัง
+    tags=["example", "hello"],
 ) as dag:
 
-    # สร้าง Task ด้วย PythonOperator
     hello_task = PythonOperator(
-        task_id='say_hello',
-        python_callable=say_hello
+        task_id="say_hello",
+        python_callable=say_hello,
     )
 
     hello_task
