@@ -12,7 +12,6 @@ default_args = {
     'retries': 1,
     'retry_delay': timedelta(minutes=1),
 }
-
 # สร้าง DAG object
 with DAG(
     dag_id='hello_world_dag',
