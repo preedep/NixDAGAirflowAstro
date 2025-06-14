@@ -10,6 +10,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # 4. คัดลอกไฟล์ทั้งหมดของโปรเจกต์ (DAGs, plugins, include, ฯลฯ)
 COPY . .
-
 # 5. ตั้ง working directory ให้ตรงกับ Airflow path
 WORKDIR /usr/local/airflow
